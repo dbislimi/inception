@@ -8,4 +8,8 @@ RUN chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
 
 COPY conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
 
-COPY tools/init_db.sh docker-entrypoint-initdb.d/init_db.sh
+COPY tools/init_db.sh init_db.sh
+
+RUN chmod +x /init_db.sh
+
+CMD ["bash", "init_db.sh"]

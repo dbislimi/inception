@@ -1,5 +1,5 @@
-version: "3"
-  services:
+services:
   mariadb:
     container_name: mariadb
-    build: mariadb
+    build: ./requirements/mariadb
+    env_file: .env
