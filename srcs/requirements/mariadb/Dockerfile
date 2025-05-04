@@ -1,15 +1,13 @@
-FROM debian:bullseye
+FROM debian:buster
 
 RUN apt update && apt upgrade -y && apt install nginx -y && apt install vim -y && apt install curl -y
-
-RUN apt-get install mariadb-server -y
-
-RUN chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
+RUN apt install mariadb-server -y
 
 COPY conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY tools/init_db.sh init_db.sh
-
 RUN chmod +x /init_db.sh
 
-CMD ["bash", "init_db.sh"]
+RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld
+
+#CMD ["bash", "init_db.sh"]
