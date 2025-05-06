@@ -10,4 +10,4 @@ RUN chmod +x /init_db.sh
 
 RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld
 
-#CMD ["bash", "init_db.sh"]
+ENTRYPOINT ["bash", "init_db.sh"]
