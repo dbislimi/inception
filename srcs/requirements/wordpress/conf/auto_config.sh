@@ -7,10 +7,11 @@ if [ ! -d "/run/php" ]; then
 fi
 
 if [ ! -f "/var/www/wordpress/wp-config.php" ]; then
+	echo "CONFIG CREA" >&2
     wp config create	--allow-root \
-					--dbname=$SQL_DATABASE \
-					--dbuser=$SQL_USER \
-					--dbpass=$SQL_PASSWORD \
+					--dbname=$DB_NAME \
+					--dbuser=$DB_USER \
+					--dbpass=$DB_PASSWORD \
 					--dbhost=mariadb:3306 --path='/var/www/wordpress'
 fi
 
