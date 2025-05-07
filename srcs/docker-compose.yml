@@ -10,7 +10,10 @@ services:
         restart: unless-stopped
         expose:
             - "3306"
-
+    web:
+        container_name: nginx
+        build: ./requirements/nginx
+        
 volumes:
     mariadb:
         driver: local
