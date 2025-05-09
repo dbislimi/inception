@@ -1,10 +1,10 @@
 FROM debian:buster
 
-RUN apt update && apt upgrade -y && apt install nginx -y && apt install vim -y && apt install curl -y
+RUN apt update && apt upgrade -y && apt install vim -y && apt install curl -y
 
 RUN apt install wget -y
 
-RUN apt-get install -y php7.3\
+RUN apt-get install -y php7.4\
 						php-fpm\
 						php-mysql\
 						mariadb-client
@@ -16,7 +16,7 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
-COPY /conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY /conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar

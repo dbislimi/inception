@@ -8,5 +8,6 @@ RUN mkdir -p /etc/nginx/ssl && apt install openssl -y && openssl req -x509 -node
 RUN chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY tools/index.html /var/www/html/
 
 CMD [ "nginx", "-g", "daemon off;" ]

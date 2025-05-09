@@ -15,4 +15,4 @@ if [ ! -f "/var/www/wordpress/wp-config.php" ]; then
 					--dbhost=mariadb:3306 --path='/var/www/wordpress'
 fi
 
-/usr/sbin/php-fpm7.3 -F
+/usr/sbin/php-fpm7.4 -F
