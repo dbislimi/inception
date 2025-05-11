@@ -1,13 +1,12 @@
-FROM debian:buster
+FROM debian:bullseye
 
-RUN apt update && apt upgrade -y && apt install nginx -y && apt install vim -y && apt install curl -y
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install nginx -y
+RUN apt-get install openssl -y
 
-RUN mkdir -p /etc/nginx/ssl && apt install openssl -y && openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=login.42.fr/UID=login" \
-	&& mkdir -p /var/run/nginx
+RUN mkdir -p /etc/nginx/ssl
+RUN chmod 700 /etc/nginx/ssl
 
-RUN chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/inception.key -out /etc/nginx/ssl/inception.crt -subj "/C=FR/ST=REGION SUD/L=Nice/O=42/OU=42/CN=dbislimi.42.fr/UID=dbislimi"
 
-COPY conf/nginx.conf /etc/nginx/nginx.conf
-COPY tools/index.html /var/www/html/
-
-CMD [ "nginx", "-g", "daemon off;" ]
+ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
