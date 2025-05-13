@@ -14,8 +14,9 @@ services:
             test: mysqladmin ping --silent && mysql -u"$DB_USER" -p"$DB_PASSWD" -e "USE $DB_NAME;"
             interval: 2s
             timeout: 5s
-            retries: 5
+            retries: 10
             start_period: 2s
+        restart: unless-stopped
     wordpress:
         build: requirements/wordpress
         container_name: wordpress
@@ -33,10 +34,11 @@ services:
                 restart: true
         healthcheck:
             test: ["CMD", "test", "-f", "/var/www/html/wp-config.php"]
-            interval: 5s
+            interval: 2s
             timeout: 5s
             retries: 10
             start_period: 2s
+        restart: always
     nginx:
         build: requirements/nginx
         container_name: nginx
@@ -49,6 +51,7 @@ services:
         depends_on:
             wordpress:
                 condition: service_healthy
+        restart: always
 
 volumes:
     wp:
@@ -56,13 +59,13 @@ volumes:
         driver_opts:
             type: "none"
             o: "bind"
-            device: "~/data/wp/"
+            device: "/home/dren/data/wp/"
     db:
         driver: local
         driver_opts:
             type: "none"
             o: "bind"
-            device: "~/data/db/"
+            device: "/home/dren/data/db/"
 
 networks:
     inception:

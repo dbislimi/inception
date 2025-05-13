@@ -13,6 +13,4 @@ RUN rm -f /etc/nginx/sites-enabled/default
 COPY conf/dbislimi.42.fr.conf /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/dbislimi.42.fr.conf /etc/nginx/sites-enabled/
 
-EXPOSE 443
-
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]

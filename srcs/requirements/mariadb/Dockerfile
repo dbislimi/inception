@@ -8,6 +8,6 @@ COPY conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
 COPY tools/init_db.sh .
 RUN chmod +x /init_db.sh
 
-#RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
+RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
 
 ENTRYPOINT [ "/init_db.sh" ]
